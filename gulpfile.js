@@ -2,7 +2,6 @@
 var gulp = require('gulp');
 var watch = require('gulp-watch');
 var del = require('del');
-var rename = require("gulp-rename");
 var replace = require('gulp-replace');
 var concat = require('gulp-concat');
 

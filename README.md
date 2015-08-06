@@ -1,83 +1,81 @@
-Workflow for Craft with Gulp
--
-Requires [Nodejs](http://nodejs.org/) and [Gulp](http://gulpjs.com/)
+## Build Workflow for Craft CMS with Gulp
 
-Getting started
--
+### Getting started
 
-**Run** ```npm install``` and ```bower install```
+__Install__ this workflow via `git clone` or download the zip of this repository to the root of your future website. If you already have Craft installed, add all _but_ the .gitignore and README.md to your Craft root, e.g. the same folder that /public and /craft are in, assuming a traditional Craft install.
 
-**Compass needs the compass ruby gem.**
-If you don't already have it: ```gem update --system``` and ```gem install compass```
+__Run__ `npm install` to add the needed build software.
 
-[Download](http://buildwithcraft.com/) the latest version of craft and move the craft folder to the root.
+__Set__ the devProxy attribute in the package.json file to your development domain for this website. (Yes, you need a separate domain for development; more to follow.)
 
-Tasks
--
+[Download](http://buildwithcraft.com/) the latest version of craft and move the craft folder to the root if not already there. (And, you should complete the Craft install process at your production domain before using this workflow for the first time.)
 
-_note: Don't touch the templates folder in ```/craft``` it will be overwritten on build. Work on the ones in ```app/templates```_
+__Configure__ your web server software with an additional vhost (or equivalent) that uses the /app folder as a document root rather than the production standard of /public.
 
-* ```gulp watch``` to start the watch task, at the moment you will have to use a browser extention for live reload.
+__Update__ the bower dependencies for your website in bower.json, run `bower install`, and finally update the default Craft app/templates/_layout.html (and any other layouts) to utilize those Third-party resources.
 
-* ```gulp``` to build for production, all the magic happens and template files will be moved to ```craft/templates```, resources (images/js/css) will be concatinated, minified and wrapped in silk before they end up in ```/public```.
+### Tasks
 
-* ```gulp bower``` Injects bower dependencies into ```_layout.html```. This task will run on ```gulp watch``` as well.
-_Remember to ```--save``` when installing components_.
+Perform all editing on files within the /app folder, including the templates. All files and folders in the /craft/templates folder will be deleted and/or overwritten.
 
-Set ```/app``` as server root on development and ```/public``` for production.
+* `gulp watch` to start the watch task, which monitors coffee, less, templates, images and fonts for changes and recompiles as needed prior to having BrowserSync refresh your views. The development host and port will be shown when in your terminal when BrowserSync starts. (Remember to open the ports if you use a firewall.)
+
+* `gulp` or `gulp build` to build for production.
+
+### Gulp Plugins
 
 
-Gulp Plugins
--
+* __less__ -
+_CSS compiler_
 
 
-* **compass** -
-_Css compiler_
-
-
-* **autoprefixer** -
+* __autoprefixer__ -
 _So we don't have to write -moz-, -webkit-, -ms-, -o-, -all-, -the-, -time-_
 
 
-* **concat** -
-_Merging css and js to single files_
+* __minify-css__ -
+_Compress CSS in the build process_
 
 
-* **uglify** -
-_Javascript minifyer_
+* __coffeelint__ -
+_CoffeeScript linter_
 
 
-* **jshint** -
+* __coffee__ -
+_CoffeeScript compiler, until ES6_
+
+
+* __jshint__ -
 _A tool that helps to detect errors and potential problems in your JavaScript code._
 
 
-* **watch** -
+* __uglify__ -
+_Javascript minification for the build process_
+
+
+* __replace__ -
+_Version image urls inside CSS and js_
+
+
+* __concat__ -
+_Merge CSS and js to single files_
+
+
+* __watch__ -
 _The thing that tells us when a file has changed_
 
 
-* **livereload** -
-_Updates our browsers when js or css changes_
+* __browsersync__ -
+_Updates our browsers when scripts, styles or static files change_
 
 
-* **usemin** -
-_Reads the html to know what files to concat and stuff_
-
-
-* **util** -
-_Logs stuff. And it can ```gutil.beep();``` too :o_
-
-
-* **del** -
-_Our garbage guy_
-
-
-* **cache** -
-_A temp file based caching proxy task for Gulp._
-
-
-* **imagemin** -
+* __imagemin__ -
 _Optimizes images for you._
 
 
-* **wiredep** -
-_Injects script and link tags when you install something with bower._
+* __usemin__ -
+_Reads the html to convert assets from development to minified and concatted production files_
+
+
+* __del__ -
+_A clean house is a happy house_
