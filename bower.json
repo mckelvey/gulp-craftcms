@@ -1,14 +1,14 @@
 {
-  "name": "craftgulp",
-  "version": "0.0.0",
+  "name": "gulp-craftcms",
+  "version": "0.0.2",
   "authors": [
-    "Mathias Stav <mathias@feed.no>"
+    "David W. McKelvey <david@mckelveycreative.com>"
   ],
   "license": "MIT",
-  "private": true,
+  "private": false,
   "dependencies": {
-    "normalize-css": "~3.0.1",
-    "jquery": "~2.1.1",
-    "modernizr": "~2.8.2"
+    "bootstrap": "~3.3.5",
+    "jquery": "~1.11.3",
+    "lodash": "~3.10.1"
   }
 }

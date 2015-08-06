@@ -1,6 +1,9 @@
-.DS_Store
-app/resources/bower_components
-craft/storage/runtime/*
+
+craft
+public
+
 node_modules
-*.sass-cache
+third-party
+
+.DS_Store
 *.log
