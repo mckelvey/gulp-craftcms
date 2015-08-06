@@ -19,7 +19,7 @@ var imagemin = require('gulp-imagemin');
 var usemin = require('gulp-usemin');
 
 var browserSync = require('browser-sync').create();
-
+var devProxy = require('./package.json').devProxy;
 
 // Less
 
@@ -55,6 +55,37 @@ gulp.task('coffee', ['clean-scripts'], function(){
     .pipe(concat('main.js'))
     .pipe(gulp.dest('app/scripts'))
     .pipe(browserSync.stream());
+});
+
+
+// Templates
+
+gulp.task('clean-templates', function(){
+  return del('./craft/templates/**');
+});
+
+gulp.task('usemin', ['clean-templates', 'less', 'coffee'], function() {
+	return gulp.src('./app/templates/**/*.html', { base: './app/templates' })
+  	.pipe(usemin({
+  		thirdPartyStyles: [minifyCSS({ removeEmpty: true }), 'concat'],
+  		styles: [minifyCSS({ removeEmpty: true }), 'concat'],
+  		thirdPartyScripts: [uglify()],
+  		scripts: [uglify()]
+  	}))
+  	.pipe(gulp.dest('./craft/templates'));
+});
+
+gulp.task('clean-assets', function() {
+  return del(['./public/styles/**', './public/scripts/**']);
+});
+
+gulp.task('copy-assets', ['usemin', 'clean-assets'], function() {
+  return gulp.src(['./craft/templates/styles/**', './craft/templates/scripts/**'], { base: './craft/templates' })
+    .pipe(gulp.dest('./public'));
+});
+
+gulp.task('templates', ['copy-assets'], function() {
+  return del(['./craft/templates/styles/**', './craft/templates/scripts/**']);
 });
 
 
@@ -104,7 +135,7 @@ gulp.task('static', ['clean-static'], function () {
 gulp.task('watch', ['less', 'coffee'], function() {
 
   browserSync.init({
-    proxy: "dev.mosarcommercial.com"
+    proxy: devProxy
   });
 
   gulp.watch('app/less/**/*.less', ['less']);
@@ -115,22 +146,6 @@ gulp.task('watch', ['less', 'coffee'], function() {
 
 
 // Build
-
-gulp.task('usemin', ['less', 'coffee'], function() {
-	return gulp.src('app/templates/**')
-  	.pipe(usemin({
-  		thirdPartyStyles: [minifyCSS({ removeEmpty: true }), 'concat'],
-  		styles: [minifyCSS({ removeEmpty: true }), 'concat'],
-  		thirdPartyScripts: [uglify()],
-  		scripts: [uglify()]
-  	}))
-  	.pipe(gulp.dest('./public'));
-});
-
-gulp.task('templates', ['usemin'], function() {
-  return gulp.src('./public/**/*.html')
-    .pipe(gulp.dest('./craft/templates'));
-});
 
 gulp.task('build', ['templates', 'images', 'fonts', 'static'], function() {
   del('./public/**/*.html');
