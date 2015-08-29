@@ -23,7 +23,7 @@ var devProxy = require('./package.json').devProxy;
 // Less
 
 gulp.task('clean-styles', function(){
-  return del('app/styles/**');
+  return del('app/styles/**/*.*');
 });
 
 gulp.task('less', ['clean-styles'], function(){
@@ -39,7 +39,7 @@ gulp.task('less', ['clean-styles'], function(){
 // Coffee
 
 gulp.task('clean-scripts', function(){
-  return del('app/scripts/**');
+  return del('app/scripts/**/*.*');
 });
 
 gulp.task('coffee', ['clean-scripts'], function(){
@@ -60,7 +60,7 @@ gulp.task('coffee', ['clean-scripts'], function(){
 // Templates
 
 gulp.task('clean-templates', function(){
-  return del('./craft/templates/**');
+  return del('./craft/templates/**/*.*');
 });
 
 gulp.task('usemin', ['clean-templates', 'less', 'coffee'], function() {
@@ -75,7 +75,7 @@ gulp.task('usemin', ['clean-templates', 'less', 'coffee'], function() {
 });
 
 gulp.task('clean-assets', function() {
-  return del(['./public/styles/**', './public/scripts/**']);
+  return del(['./public/styles/**/*.*', './public/scripts/**/*.*']);
 });
 
 gulp.task('copy-assets', ['usemin', 'clean-assets'], function() {
@@ -91,7 +91,7 @@ gulp.task('templates', ['copy-assets'], function() {
 // Images
 
 gulp.task('clean-images', function(){
-  return del('public/images/**');
+  return del('public/images/**/*.*');
 });
 
 gulp.task('images', ['clean-images'], function () {
@@ -108,7 +108,7 @@ gulp.task('images', ['clean-images'], function () {
 // Fonts
 
 gulp.task('clean-fonts', function(){
-  return del('public/fonts/**');
+  return del('public/fonts/**/*.*');
 });
 
 gulp.task('fonts', ['clean-fonts'], function () {
@@ -137,8 +137,8 @@ gulp.task('watch', ['less', 'coffee'], function() {
     proxy: devProxy
   });
 
-  gulp.watch('app/less/**/*.less', ['less']);
-  gulp.watch('app/coffee/**/*.coffee', ['coffee']);
+  gulp.watch('app/less/**/*.less', { readDelay: 500 }, ['less']);
+  gulp.watch('app/coffee/**/*.coffee', { readDelay: 500 }, ['coffee']);
   gulp.watch(['app/images/**', 'app/fonts/**', 'app/templates/*.html']).on('change', browserSync.reload);
 
 });
