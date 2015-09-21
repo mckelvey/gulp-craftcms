@@ -12,6 +12,7 @@
     "gulp": "~3.9.0",
     "gulp-watch": "~4.3.4",
     "gulp-concat": "~2.6.0",
+    "gulp-rename": "~1.2.2",
     "gulp-replace": "~0.5.4",
     "gulp-less": "~3.0.3",
     "gulp-autoprefixer": "~2.3.1",
@@ -21,7 +22,6 @@
     "gulp-jshint": "~1.11.2",
     "gulp-uglify": "~1.2.0",
     "gulp-imagemin": "~2.3.0",
-    "gulp-usemin": "=0.3.8",
     "jshint-stylish": "~2.0.1",
     "browser-sync": "~2.8.2"
   },
@@ -32,5 +32,13 @@
       "value" : 160
     }
   },
-  "devProxy": "your.domain.dev"
+  "devProxy": "your.domain.dev",
+  "thirdPartyStyles": [
+    "./app/third-party/bootstrap/dist/css/bootstrap.css"
+  ],
+  "thirdPartyScripts": [
+    "./app/third-party/jquery/dist/jquery.js",
+    "./app/third-party/bootstrap/dist/js/bootstrap.js",
+    "./app/third-party/lodash/dist/lodash.js"
+  ]
 }
