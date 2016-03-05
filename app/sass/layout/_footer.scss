@@ -1,0 +1,26 @@
+
+// Footer
+// ------
+
+footer {
+  a {
+    &:hover {
+    }
+  }
+  
+  .nav-footer {
+    > li {
+      > a {
+      }
+
+      > a:hover,
+      > a:focus {
+      }
+    }
+  }
+  
+  .copyright {
+    > span {
+    }
+  }
+}

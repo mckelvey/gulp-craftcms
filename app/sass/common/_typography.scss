@@ -1,0 +1,33 @@
+
+// Typography
+// ----------
+
+$font-family-sans-serif:        sans-serif;
+$font-family-serif:             serif;
+
+// Font Sets
+// ---------
+
+@mixin sans($weight: 300, $style: normal) {
+  font-family: $font-family-sans-serif;
+  font-style: $style;
+  font-weight: $weight;
+}
+
+@mixin sans-serif($weight: 400, $style: normal) {
+  font-family: $font-family-serif;
+  font-style: $style;
+  font-weight: $weight;
+}
+
+@mixin body-font() {
+  @include sans-serif();
+}
+
+@mixin header-font($weight: 700) {
+  @include sans($weight);
+}
+
+@mixin title-font($weight: 400) {
+  @include sans($weight);
+}

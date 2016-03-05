@@ -1,0 +1,25 @@
+{
+  "software": {
+    "useVagrant": true,
+    "useLocal": false,
+    "useRsync": true,
+    "useSFTP": false
+  },
+  "database": {
+    "name": "",
+    "username": "",
+    "password": ""
+  },
+  "development": {
+    "host": "yoursite.local",
+    "devhost": "yoursite.local.dev",
+    "username": "vagrant",
+    "password": "vagrant"
+  },
+  "production" : {
+    "host": "yoursite.com",
+    "username": "",
+    "password": "",
+    "docroot": ""
+  }
+}

@@ -1,0 +1,15 @@
+
+// Mixins
+// ------
+
+@mixin columns($width, $gap, $max) {
+  -webkit-columns: $max;
+  -moz-columns: $max;
+  columns: $max;
+  -webkit-column-width: $width;
+  -moz-column-width: $width;
+  column-width: $width;
+  -webkit-column-gap: $gap;
+  -moz-column-gap: $gap;
+  column-gap: $gap;
+}
